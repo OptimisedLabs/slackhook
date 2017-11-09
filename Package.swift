@@ -1,26 +1,24 @@
 // swift-tools-version:4.0
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "slack-vapor",
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "slack-vapor",
             targets: ["slack-vapor"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(
+            url: "https://github.com/vapor/engine.git",
+            .upToNextMajor(from: "2.2.1")
+        )
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "slack-vapor",
-            dependencies: []),
+            dependencies: ["HTTP"]),
         .testTarget(
             name: "slack-vaporTests",
             dependencies: ["slack-vapor"]),
