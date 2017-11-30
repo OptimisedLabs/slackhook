@@ -10,15 +10,11 @@ let package = Package(
             targets: ["SlackHook"]),
     ],
     dependencies: [
-        .package(
-            url: "https://github.com/vapor/engine.git",
-            .upToNextMajor(from: "2.2.1")
-        )
     ],
     targets: [
         .target(
             name: "SlackHook",
-            dependencies: ["HTTP"]),
+            dependencies: []),
         .testTarget(
             name: "SlackHookTests",
             dependencies: ["SlackHook"]),

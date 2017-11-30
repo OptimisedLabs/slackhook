@@ -1,69 +1,85 @@
 import Foundation
-import HTTP
-import TLS
 
 public struct Slack {
     // MARK: - Properties
-    private let uri: String
-    private let client: Client
+    private let URL: URL
+    private let session: URLSession
     
     // MARK: - Initialiser
     public init(from URL: URL) throws {
         if URL.scheme != "https" { throw Error.webhookNotSecure }
-        self.uri = URL.path
-        guard let scheme = URL.scheme, let host = URL.host else { throw Error.invalidWebhookURL }
-        
-        let socket = try TCPInternetSocket(
-            scheme: scheme,
-            hostname: host,
-            port: 443
-        )
-        let context = try Context(.client)
-        let tlsSocket = TLS.InternetSocket(socket, context)
-        self.client = try TLSClient(tlsSocket)
+        self.URL = URL
+        self.session = URLSession(configuration: .default)
     }
     
     // MARK: - Instance methods
-    public func post(from username: String, message: String) throws {
-        let request = Request(
-            method: .post,
-            uri: uri,
-            headers: ["Content-Type": "application/x-www-form-urlencoded; charset=utf-8"]
-        )
+    public func post(from username: String, message: String) {
+        var request = URLRequest(url: URL)
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        
         let payload = """
         payload={"username":"\(username)","text":"\(message)"}
         """
-        request.body = payload.urlQueryPercentEncoded.makeBody()
+        let bodyData = payload.urlQueryPercentEncoded.data(using: .utf8)
+        request.httpBody = bodyData
         
-        let response = try execute(request)
-        if response.status != .ok { throw Error.unexpectedResponse }
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard error == nil, let httpResponse = response as? HTTPURLResponse else {
+                print("\(Error.unexpectedResponse): \(String(describing: error)) | Response: \(String(describing: response))")
+                
+                return
+            }
+
+            if httpResponse.statusCode != 200 {
+                self.dump(request: request)
+                self.dump(response: httpResponse)
+            }
+        }
+        task.resume()
     }
     
     // MARK: - Private methods
-    private func execute(_ request: Request) throws -> Response {
-        let response: Response
+    private func dump(_ text: String) {
+        print("[SlackHook] \(text)")
+    }
+    
+    private func dump(request: URLRequest) {
+        dump("Request URL:\t\(request.httpMethod!) \(request.url!.absoluteString)")
         
-        do {
-            response = try client.respond(to: request)
-        } catch (let error) {
-            print("Request: \(request)")
-            print("Error: \(error)")
-            
-            throw error
-        }
-        if response.status != .ok {
-            print("Request: \(request)")
-            print("Response: \(response)")
+        if let allHTTPHeaderFields = request.allHTTPHeaderFields, allHTTPHeaderFields.count > 0 {
+            dump("Headers:\t\t\(allHTTPHeaderFields)")
         }
         
-        return response
+        if let data = request.httpBody, let body = String(bytes: data, encoding: .utf8) {
+            dump("Body:\t\t\t\(body)")
+        }
+    }
+    
+    private func dump(response: HTTPURLResponse) {
+        if let responseURL = response.url?.absoluteString {
+            dump("Response URL:\t\(responseURL)")
+        }
+        dump("Status:\t\t\(response.statusCode)")
+        
+        if response.allHeaderFields.count > 0 {
+            dump("Headers:")
+            for (header, value) in response.allHeaderFields {
+                dump("\t\t\t\t\(header): \(value)")
+            }
+        }
     }
 }
 
 public extension Slack {
     enum Error: Swift.Error {
         case webhookNotSecure
-        case invalidWebhookURL
         case unexpectedResponse
+    }
+}
+
+extension String {
+    public var urlQueryPercentEncoded: String {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed ) ?? ""
     }
 }
