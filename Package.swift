@@ -3,11 +3,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "slack-vapor",
+    name: "SlackHook",
     products: [
         .library(
-            name: "slack-vapor",
-            targets: ["slack-vapor"]),
+            name: "SlackHook",
+            targets: ["SlackHook"]),
     ],
     dependencies: [
         .package(
@@ -17,10 +17,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "slack-vapor",
+            name: "SlackHook",
             dependencies: ["HTTP"]),
         .testTarget(
-            name: "slack-vaporTests",
-            dependencies: ["slack-vapor"]),
+            name: "SlackHookTests",
+            dependencies: ["SlackHook"]),
     ]
 )

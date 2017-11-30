@@ -1,3 +1,3 @@
-# slack-vapor
+# SlackHook
 
 A description of this package.
