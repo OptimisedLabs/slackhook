@@ -3,17 +3,18 @@ import Foundation
 public struct Slack {
     // MARK: - Properties
     private let URL: URL
-    private let session: URLSession
     
     // MARK: - Initialiser
     public init(from URL: URL) throws {
         if URL.scheme != "https" { throw Error.webhookNotSecure }
         self.URL = URL
-        self.session = URLSession(configuration: .default)
     }
     
     // MARK: - Instance methods
     public func post(from username: String, message: String) {
+        // See https://gitlab.com/optimisedlabs/URLSessionRegression
+        let session = URLSession(configuration: .default)
+
         var request = URLRequest(url: URL)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
