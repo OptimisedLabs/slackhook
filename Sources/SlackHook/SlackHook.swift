@@ -4,7 +4,11 @@ import SimpleRESTLayer
 public struct SlackHook {
     // MARK: - Properties
     private let URL: URL
+    #if os(Linux)
+    private let client = RESTClient(configuration: .default)
+    #else
     private let client = RESTClient()
+    #endif
     
     // MARK: - Initialiser
     public init(from URL: URL) throws {
