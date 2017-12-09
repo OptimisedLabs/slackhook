@@ -1,14 +1,14 @@
 import Foundation
 import SimpleRESTLayer
 
-public struct Slack {
+public struct SlackHook {
     // MARK: - Properties
     private let URL: URL
     private let client = RESTClient()
     
     // MARK: - Initialiser
     public init(from URL: URL) throws {
-        if URL.scheme != "https" { throw Error.webhookNotSecure }
+        if URL.scheme != "https" { throw SlackError.webhookNotSecure }
         self.URL = URL
     }
     
@@ -32,9 +32,6 @@ public struct Message: Codable {
     }
 }
 
-public extension Slack {
-    enum Error: Swift.Error {
-        case webhookNotSecure
-        case unexpectedResponse
-    }
+enum SlackError: Error {
+    case webhookNotSecure
 }
