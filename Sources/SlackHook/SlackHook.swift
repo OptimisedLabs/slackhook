@@ -20,8 +20,13 @@ public struct SlackHook {
     public func post(_ message: Message) throws {
         var request = Request.with(method: .post, address: URL.absoluteString)
         try request.addJSONBody(message)
-        client.execute(request: request) { (response: Response<Message>) in
-            print("It probably worked™")
+        client.execute(request: request) { (response: Response<RawResponse>) in
+            switch response {
+            case .success(_):
+                break
+            case let .failure(error):
+                print("[SlackHook] Unable to post message, because of error: \(error)")
+            }
         }
     }
 }
