@@ -40,7 +40,3 @@ public struct Message: Codable {
         self.username = username
     }
 }
-
-enum SlackError: Error {
-    case webhookNotSecure
-}
