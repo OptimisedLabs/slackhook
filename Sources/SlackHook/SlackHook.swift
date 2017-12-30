@@ -30,13 +30,3 @@ public struct SlackHook {
         }
     }
 }
-
-public struct Message: Codable {
-    let text: String
-    let username: String?
-    
-    public init(text: String, username: String? = nil) {
-        self.text = text
-        self.username = username
-    }
-}
