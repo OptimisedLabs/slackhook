@@ -18,10 +18,10 @@ public struct SlackHook {
     
     // MARK: - Instance methods
     public func post(_ message: Message) throws {
-        var request = Request.with(method: .post, address: URL.absoluteString)
+        var request = Request.with(URL.absoluteString, method: .post)
         try request.addJSONBody(message)
-        client.execute(request: request) { (response: Response<RawResponse>) in
-            switch response {
+        client.execute(request) { (result: Result<Data>) in
+            switch result {
             case .success(_):
                 break
             case let .failure(error):
