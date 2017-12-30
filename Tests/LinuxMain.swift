@@ -3,4 +3,5 @@ import XCTest
 
 XCTMain([
     testCase(SlackHookTests.allTests),
+    testCase(MessageTests.allTests)
 ])
