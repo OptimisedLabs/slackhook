@@ -20,7 +20,7 @@ class MessageTests: XCTestCase {
     }
     
     func testMessageWithUsername() {
-        let message = Message(text: "Hello World", username: "john")
+        let message = Message(text: "Hello World", username: "john", attachments: nil)
         let expectedJson = """
         {
           "text"\(padding): "Hello World",
@@ -31,9 +31,89 @@ class MessageTests: XCTestCase {
         XCTAssertEqual(message.json(), expectedJson)
     }
     
+    func testAttachementWithTitle() {
+        let attachment = Attachment(colour: nil, text: nil, title: "Title", markdown: nil)
+        let message = Message(attachments: [attachment])
+        let expectedJson = """
+        {
+          "attachments"\(padding): [
+            {
+              "title"\(padding): "Title"
+            }
+          ]
+        }
+        """
+        
+        XCTAssertEqual(message.json(), expectedJson)
+    }
+    
+    func testAttachementWithText() {
+        let attachment = Attachment(colour: nil, text: "Text", title: nil, markdown: nil)
+        let message = Message(attachments: [attachment])
+        let expectedJson = """
+        {
+          "attachments"\(padding): [
+            {
+              "text"\(padding): "Text"
+            }
+          ]
+        }
+        """
+        
+        XCTAssertEqual(message.json(), expectedJson)
+    }
+    
+    func testCompleteMessage() {
+        let attachment1 = Attachment(colour: nil, text: nil, title: "Title1", markdown: nil)
+        let attachment2 = Attachment(colour: .good, text: "This is some text", title: "Title2", markdown: [.fields])
+        let attachment3 = Attachment(colour: .warning, text: nil, title: "Title3", markdown: [.fields])
+        let attachment4 = Attachment(colour: .danger, text: nil, title: "Title4", markdown: nil)
+        
+        let message = Message(
+            text: nil,
+            username: "Custom Username",
+            attachments: [attachment1, attachment2, attachment3, attachment4]
+        )
+        let expectedJson = """
+        {
+          "attachments"\(padding): [
+            {
+              "title": "Title1"
+            },
+            {
+              "color"\(padding): "good",
+              "mrkdwn_in"\(padding): [
+                "fields"
+              ],
+              "text"\(padding): "This is some text",
+              "title"\(padding): "Title2"
+            },
+            {
+              "color"\(padding): "warning",
+              "mrkdwn_in"\(padding): [
+                "fields"
+              ],
+              "title"\(padding): "Title3"
+            },
+            {
+              "color"\(padding): "danger",
+              "title"\(padding): "Title4"
+            }
+          ],
+          "username"\(padding): "Custom Username"
+        }
+        """
+        
+        XCTAssertEqual(message.json(), expectedJson)
+        print(message.json())
+    }
+    
     static var allTests = [
         ("testTextOnlyMessage", testTextOnlyMessage),
         ("testMessageWithUsername", testMessageWithUsername),
+        ("testAttachementWithTitle", testAttachementWithTitle),
+        ("testAttachementWithText", testAttachementWithText),
+        ("testCompleteMessage", testCompleteMessage),
     ]
 }
 
