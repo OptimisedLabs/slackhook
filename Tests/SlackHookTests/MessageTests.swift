@@ -9,10 +9,11 @@ class MessageTests: XCTestCase {
     #endif
     
     func testTextOnlyMessage() {
-        let message = Message(text: "Hello World")
+        let text = "Hello World"
+        let message = Message(text: text)
         let expectedJson = """
         {
-          "text"\(padding): "Hello World"
+          "text"\(padding): "\(text)"
         }
         """
         
@@ -20,10 +21,11 @@ class MessageTests: XCTestCase {
     }
     
     func testMessageWithUsername() {
-        let message = Message(text: "Hello World", username: "john", attachments: nil)
+        let text = "Hello World"
+        let message = Message(text: text, username: "john", attachments: nil)
         let expectedJson = """
         {
-          "text"\(padding): "Hello World",
+          "text"\(padding): "\(text)",
           "username"\(padding): "john"
         }
         """
@@ -32,13 +34,14 @@ class MessageTests: XCTestCase {
     }
     
     func testAttachementWithTitle() {
-        let attachment = Attachment(colour: nil, text: nil, title: "Title", markdownUsedIn: nil)
+        let title = "Title"
+        let attachment = Attachment(colour: nil, text: nil, title: title, markdownUsedIn: nil)
         let message = Message(attachments: [attachment])
         let expectedJson = """
         {
           "attachments"\(padding): [
             {
-              "title"\(padding): "Title"
+              "title"\(padding): "\(title)"
             }
           ]
         }
@@ -48,13 +51,14 @@ class MessageTests: XCTestCase {
     }
     
     func testAttachementWithText() {
-        let attachment = Attachment(colour: nil, text: "Text", title: nil, markdownUsedIn: nil)
+        let text = "Text"
+        let attachment = Attachment(colour: nil, text: text, title: nil, markdownUsedIn: nil)
         let message = Message(attachments: [attachment])
         let expectedJson = """
         {
           "attachments"\(padding): [
             {
-              "text"\(padding): "Text"
+              "text"\(padding): "\(text)"
             }
           ]
         }
