@@ -1,10 +1,3 @@
-//
-//  Attachment.swift
-//  SlackHook
-//
-//  Created by Graeme Read on 31/12/2017.
-//
-
 import Foundation
 
 public struct Attachment: Codable {
@@ -12,6 +5,7 @@ public struct Attachment: Codable {
     let text: String?
     let title: String?
     let markdownUsedIn: [MarkDownUsage]?
+    let fields: [Field]?
     
     public enum Colour: String, Codable {
         /// Indicator to the left of attachment will be greenish
@@ -39,5 +33,6 @@ extension Attachment {
         case text
         case title
         case markdownUsedIn = "mrkdwn_in"
+        case fields
     }
 }
