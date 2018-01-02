@@ -32,7 +32,7 @@ class MessageTests: XCTestCase {
     }
     
     func testAttachementWithTitle() {
-        let attachment = Attachment(colour: nil, text: nil, title: "Title", markdown: nil)
+        let attachment = Attachment(colour: nil, text: nil, title: "Title", markdownUsedIn: nil)
         let message = Message(attachments: [attachment])
         let expectedJson = """
         {
@@ -48,7 +48,7 @@ class MessageTests: XCTestCase {
     }
     
     func testAttachementWithText() {
-        let attachment = Attachment(colour: nil, text: "Text", title: nil, markdown: nil)
+        let attachment = Attachment(colour: nil, text: "Text", title: nil, markdownUsedIn: nil)
         let message = Message(attachments: [attachment])
         let expectedJson = """
         {
@@ -64,10 +64,10 @@ class MessageTests: XCTestCase {
     }
     
     func testCompleteMessage() {
-        let attachment1 = Attachment(colour: nil, text: nil, title: "Title1", markdown: nil)
-        let attachment2 = Attachment(colour: .good, text: "This is some text", title: "Title2", markdown: [.fields])
-        let attachment3 = Attachment(colour: .warning, text: nil, title: "Title3", markdown: [.fields])
-        let attachment4 = Attachment(colour: .danger, text: nil, title: "Title4", markdown: nil)
+        let attachment1 = Attachment(colour: nil, text: nil, title: "Title1", markdownUsedIn: nil)
+        let attachment2 = Attachment(colour: .good, text: "This is some text", title: "Title2", markdownUsedIn: [.fields])
+        let attachment3 = Attachment(colour: .warning, text: nil, title: "Title3", markdownUsedIn: [.fields])
+        let attachment4 = Attachment(colour: .danger, text: nil, title: "Title4", markdownUsedIn: nil)
         
         let message = Message(
             text: nil,

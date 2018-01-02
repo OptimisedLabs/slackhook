@@ -11,16 +11,24 @@ public struct Attachment: Codable {
     let colour: Colour?
     let text: String?
     let title: String?
-    let markdown: [MarkDownUsedIn]?
+    let markdownUsedIn: [MarkDownUsage]?
     
     public enum Colour: String, Codable {
+        /// Indicator to the left of attachment will be greenish
         case good
+        
+        /// Indicator to the left of attachment will be yellowish
         case warning
+        
+        /// Indicator to the left of attachment will be reddish
         case danger
     }
     
-    public enum MarkDownUsedIn: String, Codable {
+    public enum MarkDownUsage: String, Codable {
+        /// The text contains MarkDown
         case text
+        
+        /// One or more fields make use of MarkDown
         case fields
     }
 }
@@ -30,6 +38,6 @@ extension Attachment {
         case colour = "color"
         case text
         case title
-        case markdown = "mrkdwn_in"
+        case markdownUsedIn = "mrkdwn_in"
     }
 }
