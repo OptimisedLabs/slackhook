@@ -33,7 +33,7 @@ class MessageTests: XCTestCase {
         XCTAssertEqual(message.json(), expectedJson)
     }
     
-    func testAttachementWithTitle() {
+    func testAttachmentWithTitle() {
         let title = "Title"
         let attachment = Attachment(colour: nil, text: nil, title: title, markdownUsedIn: nil)
         let message = Message(attachments: [attachment])
@@ -50,7 +50,7 @@ class MessageTests: XCTestCase {
         XCTAssertEqual(message.json(), expectedJson)
     }
     
-    func testAttachementWithText() {
+    func testAttachmentWithText() {
         let text = "Text"
         let attachment = Attachment(colour: nil, text: text, title: nil, markdownUsedIn: nil)
         let message = Message(attachments: [attachment])
@@ -67,7 +67,7 @@ class MessageTests: XCTestCase {
         XCTAssertEqual(message.json(), expectedJson)
     }
     
-    func testAttachementWithColour() {
+    func testAttachmentWithColour() {
         let text = "Life is good"
         let attachment = Attachment(colour: .good, text: text, title: nil, markdownUsedIn: nil)
         let message = Message(attachments: [attachment])
@@ -85,7 +85,7 @@ class MessageTests: XCTestCase {
         XCTAssertEqual(message.json(), expectedJson)
     }
     
-    func testAttachementWithMarkDown() {
+    func testAttachmentWithMarkDown() {
         let text = "_This_ is *really* ~good~ bad example `code`: ```print('Hello World')```"
         let attachment = Attachment(colour: nil, text: text, title: nil, markdownUsedIn: [.text])
         
@@ -156,10 +156,10 @@ class MessageTests: XCTestCase {
     static var allTests = [
         ("testTextOnlyMessage", testTextOnlyMessage),
         ("testMessageWithUsername", testMessageWithUsername),
-        ("testAttachementWithTitle", testAttachementWithTitle),
-        ("testAttachementWithText", testAttachementWithText),
-        ("testAttachementWithColour", testAttachementWithColour),
-        ("testAttachementWithMarkDown", testAttachementWithMarkDown),
+        ("testAttachmentWithTitle", testAttachmentWithTitle),
+        ("testAttachmentWithText", testAttachmentWithText),
+        ("testAttachmentWithColour", testAttachmentWithColour),
+        ("testAttachmentWithMarkDown", testAttachmentWithMarkDown),
         ("testCompleteMessage", testCompleteMessage),
     ]
 }
