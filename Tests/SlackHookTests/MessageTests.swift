@@ -195,6 +195,7 @@ class MessageTests: XCTestCase {
         ("testAttachmentWithText", testAttachmentWithText),
         ("testAttachmentWithColour", testAttachmentWithColour),
         ("testAttachmentWithMarkDown", testAttachmentWithMarkDown),
+        ("testAttachmentWithFields", testAttachmentWithFields),
         ("testCompleteMessage", testCompleteMessage),
     ]
 }
