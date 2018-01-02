@@ -78,7 +78,7 @@ class MessageTests: XCTestCase {
         {
           "attachments"\(padding): [
             {
-              "title": "Title1"
+              "title"\(padding): "Title1"
             },
             {
               "color"\(padding): "good",
