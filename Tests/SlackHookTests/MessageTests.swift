@@ -63,6 +63,47 @@ class MessageTests: XCTestCase {
         XCTAssertEqual(message.json(), expectedJson)
     }
     
+    func testAttachementWithColour() {
+        let text = "Life is good"
+        let attachment = Attachment(colour: .good, text: text, title: nil, markdownUsedIn: nil)
+        let message = Message(attachments: [attachment])
+        let expectedJson = """
+        {
+          "attachments"\(padding): [
+            {
+              "color"\(padding): "good",
+              "text"\(padding): "\(text)"
+            }
+          ]
+        }
+        """
+        
+        XCTAssertEqual(message.json(), expectedJson)
+    }
+    
+    func testAttachementWithMarkDown() {
+        let text = "_This_ is *really* ~good~ bad example `code`: ```print('Hello World')```"
+        let attachment = Attachment(colour: nil, text: text, title: nil, markdownUsedIn: [.text])
+        
+        let message = Message(text: nil, username: nil, attachments: [attachment])
+        let expectedJson = """
+        {
+          "attachments"\(padding): [
+            {
+              "mrkdwn_in"\(padding): [
+                "text"
+              ],
+              "text"\(padding): "\(text)"
+            }
+          ]
+        }
+        """
+        
+        XCTAssertEqual(message.json(), expectedJson)
+        print(message.json())
+    }
+
+    
     func testCompleteMessage() {
         let attachment1 = Attachment(colour: nil, text: nil, title: "Title1", markdownUsedIn: nil)
         let attachment2 = Attachment(colour: .good, text: "This is some text", title: "Title2", markdownUsedIn: [.fields])
@@ -113,6 +154,8 @@ class MessageTests: XCTestCase {
         ("testMessageWithUsername", testMessageWithUsername),
         ("testAttachementWithTitle", testAttachementWithTitle),
         ("testAttachementWithText", testAttachementWithText),
+        ("testAttachementWithColour", testAttachementWithColour),
+        ("testAttachementWithMarkDown", testAttachementWithMarkDown),
         ("testCompleteMessage", testCompleteMessage),
     ]
 }
