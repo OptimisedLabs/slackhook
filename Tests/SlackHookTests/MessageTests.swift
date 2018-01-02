@@ -187,7 +187,6 @@ class MessageTests: XCTestCase {
         """
         
         XCTAssertEqual(message.json(), expectedJson)
-        print(message.json())
     }
     
     static var allTests = [
