@@ -3,7 +3,7 @@ import XCTest
 
 class MessageTests: XCTestCase {
     #if os(Linux)
-    let padding = ""
+    let padding = " "
     #else
     let padding = " "
     #endif
