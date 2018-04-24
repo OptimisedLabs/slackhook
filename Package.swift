@@ -10,7 +10,7 @@ let package = Package(
             targets: ["SlackHook"]),
     ],
     dependencies: [
-        .package(url: "https://gitlab.com/optimisedlabs/simplerestlayer.git", .upToNextMinor(from: "0.6.0"))
+        .package(url: "https://gitlab.com/optimisedlabs/simplerestlayer.git", .upToNextMinor(from: "0.7.0"))
     ],
     targets: [
         .target(
