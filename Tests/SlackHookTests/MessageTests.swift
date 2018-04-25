@@ -188,17 +188,6 @@ class MessageTests: XCTestCase {
         
         XCTAssertEqual(message.json(), expectedJson)
     }
-    
-    static var allTests = [
-        ("testTextOnlyMessage", testTextOnlyMessage),
-        ("testMessageWithUsername", testMessageWithUsername),
-        ("testAttachmentWithTitle", testAttachmentWithTitle),
-        ("testAttachmentWithText", testAttachmentWithText),
-        ("testAttachmentWithColour", testAttachmentWithColour),
-        ("testAttachmentWithMarkDown", testAttachmentWithMarkDown),
-        ("testAttachmentWithFields", testAttachmentWithFields),
-        ("testCompleteMessage", testCompleteMessage),
-    ]
 }
 
 extension Message {

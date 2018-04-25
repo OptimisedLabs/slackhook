@@ -11,9 +11,4 @@ class SlackHookTests: XCTestCase {
         let url = URL(string: "https://hooks.slack.com/services/.../.../...")!
         XCTAssertNoThrow(try SlackHook(from: url), "Trying to initialise with a secure URL should not throw")
     }
-
-    static var allTests = [
-        ("testInsecureWebhook", testInsecureWebhook),
-        ("testSecureWebhook", testSecureWebhook),
-    ]
 }
