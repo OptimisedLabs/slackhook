@@ -2,18 +2,12 @@ import XCTest
 @testable import SlackHook
 
 class MessageTests: XCTestCase {
-    #if os(Linux)
-    let padding = " "
-    #else
-    let padding = " "
-    #endif
-    
     func testTextOnlyMessage() {
         let text = "Hello World"
         let message = Message(text: text)
         let expectedJson = """
         {
-          "text"\(padding): "\(text)"
+          "text" : "\(text)"
         }
         """
         
@@ -25,8 +19,8 @@ class MessageTests: XCTestCase {
         let message = Message(text: text, username: "john", attachments: nil)
         let expectedJson = """
         {
-          "text"\(padding): "\(text)",
-          "username"\(padding): "john"
+          "text" : "\(text)",
+          "username" : "john"
         }
         """
         
@@ -39,9 +33,9 @@ class MessageTests: XCTestCase {
         let message = Message(attachments: [attachment])
         let expectedJson = """
         {
-          "attachments"\(padding): [
+          "attachments" : [
             {
-              "title"\(padding): "\(title)"
+              "title" : "\(title)"
             }
           ]
         }
@@ -56,9 +50,9 @@ class MessageTests: XCTestCase {
         let message = Message(attachments: [attachment])
         let expectedJson = """
         {
-          "attachments"\(padding): [
+          "attachments" : [
             {
-              "text"\(padding): "\(text)"
+              "text" : "\(text)"
             }
           ]
         }
@@ -73,10 +67,10 @@ class MessageTests: XCTestCase {
         let message = Message(attachments: [attachment])
         let expectedJson = """
         {
-          "attachments"\(padding): [
+          "attachments" : [
             {
-              "color"\(padding): "good",
-              "text"\(padding): "\(text)"
+              "color" : "good",
+              "text" : "\(text)"
             }
           ]
         }
@@ -91,12 +85,12 @@ class MessageTests: XCTestCase {
         let message = Message(text: nil, username: nil, attachments: [attachment])
         let expectedJson = """
         {
-          "attachments"\(padding): [
+          "attachments" : [
             {
-              "mrkdwn_in"\(padding): [
+              "mrkdwn_in" : [
                 "text"
               ],
-              "text"\(padding): "\(text)"
+              "text" : "\(text)"
             }
           ]
         }
@@ -114,23 +108,23 @@ class MessageTests: XCTestCase {
         let message = Message(text: nil, username: nil, attachments: [attachment])
         let expectedJson = """
         {
-          "attachments"\(padding): [
+          "attachments" : [
             {
-              "fields"\(padding): [
+              "fields" : [
                 {
-                  "short"\(padding): true,
-                  "title"\(padding): "Short 1",
-                  "value"\(padding): "Value 1"
+                  "short" : true,
+                  "title" : "Short 1",
+                  "value" : "Value 1"
                 },
                 {
-                  "short"\(padding): true,
-                  "title"\(padding): "Short 2",
-                  "value"\(padding): "Value 2"
+                  "short" : true,
+                  "title" : "Short 2",
+                  "value" : "Value 2"
                 },
                 {
-                  "short"\(padding): false,
-                  "title"\(padding): "Long",
-                  "value"\(padding): "\(longValue)"
+                  "short" : false,
+                  "title" : "Long",
+                  "value" : "\(longValue)"
                 }
               ]
             }
@@ -154,35 +148,35 @@ class MessageTests: XCTestCase {
         let message = Message(text: text, username: "Custom Username", attachments: [attachment])
         let expectedJson = """
         {
-          "attachments"\(padding): [
+          "attachments" : [
             {
-              "color"\(padding): "warning",
-              "fields"\(padding): [
+              "color" : "warning",
+              "fields" : [
                 {
-                  "short"\(padding): false,
-                  "title"\(padding): "Long",
-                  "value"\(padding): "\(longValue)"
+                  "short" : false,
+                  "title" : "Long",
+                  "value" : "\(longValue)"
                 },
                 {
-                  "short"\(padding): true,
-                  "title"\(padding): "Short 2",
-                  "value"\(padding): "Value 2"
+                  "short" : true,
+                  "title" : "Short 2",
+                  "value" : "Value 2"
                 },
                 {
-                  "short"\(padding): true,
-                  "title"\(padding): "Short 1",
-                  "value"\(padding): "Value 1"
+                  "short" : true,
+                  "title" : "Short 1",
+                  "value" : "Value 1"
                 }
               ],
-              "mrkdwn_in"\(padding): [
+              "mrkdwn_in" : [
                 "fields"
               ],
-              "text"\(padding): "\(attachmentText)",
-              "title"\(padding): "Title2"
+              "text" : "\(attachmentText)",
+              "title" : "Title2"
             }
           ],
-          "text"\(padding): "\(text)",
-          "username"\(padding): "Custom Username"
+          "text" : "\(text)",
+          "username" : "Custom Username"
         }
         """
         
