@@ -7,7 +7,7 @@ public final class CommandLineTool {
         self.arguments = arguments
     }
     
-    public func run() throws {
+    public func run(completionHandler: ((Swift.Error?) -> Void)? = nil) throws {
         guard arguments.count > 1 else {
             throw Error.missingWebHookURL
         }
@@ -19,7 +19,7 @@ public final class CommandLineTool {
         
         let slackHook = try SlackHook(from: slackHookURL)
         let message = Message(text: "Test message", username: "SlackHook", attachments: nil)
-        try slackHook.post(message)
+        try slackHook.post(message) { completionHandler?($0) }
     }
 }
 
