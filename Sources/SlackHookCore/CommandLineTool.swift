@@ -11,13 +11,19 @@ public final class CommandLineTool {
         guard arguments.count > 1 else {
             throw Error.missingWebHookURL
         }
+        guard let slackHookURL = URL(string: arguments[1]),
+            slackHookURL.scheme != nil,
+            slackHookURL.host != nil else {
+            throw Error.invalidWebHookURL
+        }
         
-        print("WebHook URL: \(arguments[1])")
+        print("WebHook URL: \(slackHookURL)")
     }
 }
 
-public extension CommandLineTool {
+extension CommandLineTool {
     enum Error: Swift.Error {
         case missingWebHookURL
+        case invalidWebHookURL
     }
 }
