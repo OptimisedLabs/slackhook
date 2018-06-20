@@ -2,9 +2,11 @@ import XCTest
 @testable import SlackHookCore
 
 class CommandLineToolTests: XCTestCase {
-    func testNoArgumentThrow() {
+    func testNoArgument() {
         let tool = CommandLineTool(arguments: [])
         
-        XCTAssertThrowsError(try tool.run(), "Trying to initialise with no WebHook URL should throw")
+        XCTAssertThrowsError(try tool.run(), "Trying to initialise with no WebHook URL should throw") { error in
+            XCTAssertEqual(error as? CommandLineTool.Error, CommandLineTool.Error.missingWebHookURL, "Thrown error should be missingWebHookURL")
+        }
     }
 }
