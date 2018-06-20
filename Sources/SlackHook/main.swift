@@ -1,4 +1,5 @@
 import Foundation
+import SlackHookCore
 
 do {
     try CommandLineTool().run()
