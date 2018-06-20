@@ -17,15 +17,15 @@ public struct SlackHook {
     }
     
     // MARK: - Instance methods
-    public func post(_ message: Message) throws {
+    public func post(_ message: Message, completionHandler: @escaping (Error?) -> Void) throws {
         var request = Request.with(URL.absoluteString, method: .post)
         try request.addJSONBody(message)
         client.execute(request) { (result: Result<Data>) in
             switch result {
             case .success(_):
-                break
-            case let .failure(error):
-                print("[SlackHook] Unable to post message, because of error: \(error)")
+                completionHandler(nil)
+            case .failure(let error):
+                completionHandler(error)
             }
         }
     }
