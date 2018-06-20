@@ -1,7 +1,8 @@
-let tool = CommandLineTool()
+import Foundation
 
 do {
-    try tool.run()
+    try CommandLineTool().run()
 } catch {
     print("An error occurred: \(error)")
+    exit(1)
 }
