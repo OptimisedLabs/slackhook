@@ -1,8 +1,8 @@
 import XCTest
 
-import SlackHookTests
+import SlackHookCoreTests
 
 var tests = [XCTestCaseEntry]()
-tests += SlackHookTests.__allTests()
+tests += SlackHookCoreTests.__allTests()
 
 XCTMain(tests)

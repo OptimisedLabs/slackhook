@@ -15,7 +15,7 @@ let package = Package(
             name: "SlackHookCore",
             dependencies: ["SimpleRESTLayer"]),
         .testTarget(
-            name: "SlackHookTests",
+            name: "SlackHookCoreTests",
             dependencies: ["SlackHook"]),
     ]
 )

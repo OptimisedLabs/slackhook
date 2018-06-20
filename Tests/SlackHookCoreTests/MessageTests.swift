@@ -1,5 +1,5 @@
 import XCTest
-@testable import SlackHook
+@testable import SlackHookCore
 
 class MessageTests: XCTestCase {
     func testTextOnlyMessage() {
