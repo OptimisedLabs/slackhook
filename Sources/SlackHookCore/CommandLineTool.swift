@@ -17,7 +17,9 @@ public final class CommandLineTool {
             throw Error.invalidWebHookURL
         }
         
-        print("WebHook URL: \(slackHookURL)")
+        let slackHook = try SlackHook(from: slackHookURL)
+        let message = Message(text: "Test message", username: "SlackHook", attachments: nil)
+        try slackHook.post(message)
     }
 }
 

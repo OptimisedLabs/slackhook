@@ -17,4 +17,10 @@ class CommandLineToolTests: XCTestCase {
             XCTAssertEqual(error as? CommandLineTool.Error, CommandLineTool.Error.invalidWebHookURL, "Thrown error should be invalidWebHookURL")
         }
     }
+    
+    func testSendingDemoMessage() {
+        let tool = CommandLineTool(arguments: ["executable", "https://hooks.slack.com/services/..."])
+        
+        XCTAssertNoThrow(try tool.run(), "Should send a demo message")
+    }
 }
