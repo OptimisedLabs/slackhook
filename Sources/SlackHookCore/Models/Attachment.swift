@@ -25,6 +25,14 @@ public struct Attachment: Codable {
         /// One or more fields make use of MarkDown
         case fields
     }
+    
+    public init(colour: Colour?, text: String?, title: String?, markdownUsedIn: [MarkDownUsage]?, fields: [Field]?) {
+        self.colour = colour
+        self.text = text
+        self.title = title
+        self.markdownUsedIn = markdownUsedIn
+        self.fields = fields
+    }
 }
 
 extension Attachment {
