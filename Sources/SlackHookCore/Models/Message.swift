@@ -1,9 +1,9 @@
 import Foundation
 
 public struct Message: Codable {
-    var text: String?
-    var username: String?
-    var attachments: [Attachment]?
+    public var text: String?
+    public var username: String?
+    public var attachments: [Attachment]?
 }
 
 extension Message {

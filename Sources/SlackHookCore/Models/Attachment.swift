@@ -1,11 +1,11 @@
 import Foundation
 
 public struct Attachment: Codable {
-    let colour: Colour?
-    let text: String?
-    let title: String?
-    let markdownUsedIn: [MarkDownUsage]?
-    let fields: [Field]?
+    public let colour: Colour?
+    public let text: String?
+    public let title: String?
+    public let markdownUsedIn: [MarkDownUsage]?
+    public let fields: [Field]?
     
     public enum Colour: String, Codable {
         /// Indicator to the left of attachment will be greenish

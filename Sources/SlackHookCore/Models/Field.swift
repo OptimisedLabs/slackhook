@@ -1,11 +1,11 @@
 import Foundation
 
 public struct Field: Codable {
-    let title: String
-    let short: Bool
-    let value: String
+    public let title: String
+    public let value: String
+    public let short: Bool
     
-    init(title: String, short: Bool = true, value: String) {
+    public init(title: String, value: String, short: Bool = true) {
         self.title = title
         self.short = short
         self.value = value

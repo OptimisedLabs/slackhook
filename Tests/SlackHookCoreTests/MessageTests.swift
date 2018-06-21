@@ -103,7 +103,7 @@ class MessageTests: XCTestCase {
         let shortField1 = Field(title: "Short 1", value: "Value 1")
         let shortField2 = Field(title: "Short 2", value: "Value 2")
         let longValue = "This field could be really large and span multiple lines"
-        let longField = Field(title: "Long", short: false, value: longValue)
+        let longField = Field(title: "Long", value: longValue, short: false)
         let attachment = Attachment(colour: nil, text: nil, title: nil, markdownUsedIn: nil, fields: [shortField1, shortField2, longField])
         let message = Message(text: nil, username: nil, attachments: [attachment])
         let expectedJson = """
@@ -142,7 +142,7 @@ class MessageTests: XCTestCase {
         let shortField1 = Field(title: "Short 1", value: "Value 1")
         let shortField2 = Field(title: "Short 2", value: "Value 2")
         let longValue = "This field could be really large and span multiple lines"
-        let longField = Field(title: "Long", short: false, value: longValue)
+        let longField = Field(title: "Long", value: longValue, short: false)
         
         let attachment = Attachment(colour: .warning, text: attachmentText, title: "Title2", markdownUsedIn: [.fields], fields: [longField, shortField2, shortField1])
         let message = Message(text: text, username: "Custom Username", attachments: [attachment])
