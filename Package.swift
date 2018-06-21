@@ -4,6 +4,9 @@ import PackageDescription
 
 let package = Package(
     name: "SlackHook",
+    products: [
+        .library(name: "SlackHook", targets: ["SlackHookCore"])
+    ],
     dependencies: [
         .package(url: "https://gitlab.com/optimisedlabs/simplerestlayer.git", .upToNextMinor(from: "0.7.0"))
     ],
