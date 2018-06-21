@@ -62,10 +62,10 @@ try! slackHook.post(message)
 In your `Packages.swift` add:
 
 ```swift
-.package(url: "https://gitlab.com/optimisedlabs/slackhook.git", .from: "0.2.0")
+.package(url: "https://gitlab.com/optimisedlabs/slackhook.git", .from: "0.3.0")
 ```
 
-*NOTE*: `.upToNextMinor(from: "0.2.0")` might be better whilst the API stablises.
+*NOTE*: `.upToNextMinor(from: "0.3.0")` might be better whilst the API stablises.
 
 ## Acknowledgements and thanks
 
