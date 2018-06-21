@@ -17,6 +17,19 @@ Send messages to Slack from Swift.
 
 See [Slack API documentation](https://api.slack.com/docs/messages) for more information.
 
+## Demo
+
+To get a feel for what is possible with SlackHook you can run the built-in demo:
+
+```
+swift build
+swift run SlackHook <WebHook URL>
+```
+
+Replace `<WebHook URL>` with the a valid Slack WebHook URL and you will see a demo message posted similar to the following:
+
+![Demo Image](SlackHook-Demo-Message.jpg)
+
 ## Usage
 
 SlackHook should be simple to use and have a self explanatory API.
@@ -24,7 +37,7 @@ SlackHook should be simple to use and have a self explanatory API.
 ```swift
 import SlackHookCore
 
-let slackHook = try SlackHook(from: "Slack WehHook URL")
+let slackHook = try SlackHook(from: "<WebHook URL>")
 let message = Message(text: "Hello from Swift", username: "SlackHook", attachments: nil)
 try! slackHook.post(message)
 ```

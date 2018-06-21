@@ -18,7 +18,12 @@ public final class CommandLineTool {
         }
         
         let slackHook = try SlackHook(from: slackHookURL)
-        let message = Message(text: "Test message", username: "SlackHook", attachments: nil)
+        let attachements = [
+            Attachment(colour: .good, text: "All is good", title: nil, markdownUsedIn: nil, fields: nil),
+            Attachment(colour: .warning, text: nil, title: nil, markdownUsedIn: nil, fields: [Field(title: "Energy", value: "50%"), Field(title: "Light", value: "Low")]),
+            Attachment(colour: .danger, text: "The `decoder` threw a few warning", title: "Possible problem", markdownUsedIn: [.fields], fields: nil)
+        ]
+        let message = Message(text: "👋🏻 from Swift", username: "SlackHook", attachments: attachements)
         try slackHook.post(message) { completionHandler?($0) }
     }
 }
