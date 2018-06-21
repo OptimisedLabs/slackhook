@@ -3,9 +3,9 @@
 [![coverage report](https://gitlab.com/optimisedlabs/slackhook/badges/master/coverage.svg)](https://gitlab.com/optimisedlabs/slackhook/commits/master)
 [![codebeat badge](https://codebeat.co/badges/2f9f6122-5d8f-4b51-a098-4d4eda671585)](https://codebeat.co/projects/github-com-optimisedlabs-slackhook-master)
 [![Language](https://img.shields.io/badge/language-Swift%204.1-orange.svg)](https://developer.apple.com/swift/)
-[![Platforms](https://img.shields.io/badge/platform-ios%20%7C%20macos%20%7C%20tvos%20%7C%20watchos%20%7C%20linux-yellow.svg)](https://gitlab.com/optimisedlabs/simplerestlayer)
+[![Platforms](https://img.shields.io/badge/platform-ios%20%7C%20macos%20%7C%20tvos%20%7C%20watchos%20%7C%20linux-yellow.svg)](https://gitlab.com/optimisedlabs/slackhook)
 [![Swift PM](https://img.shields.io/badge/spm-compatible-brightgreen.svg)](https://swift.org/package-manager)
-[![License](https://img.shields.io/badge/license-Apache--2.0-lightgrey.svg)](https://github.com/graemer957/helloworld-swift-framework/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-lightgrey.svg)](LICENSE)
 
 Send messages to Slack from Swift.
 
@@ -13,6 +13,7 @@ Send messages to Slack from Swift.
 
 - [x] Send simple text only messages
 - [x] Add attachements with colours and fields
+- [x] Fully tested
 
 See [Slack API documentation](https://api.slack.com/docs/messages) for more information.
 
@@ -27,6 +28,8 @@ let slackHook = try SlackHook(from: "Slack WehHook URL")
 let message = Message(text: "Hello from Swift", username: "SlackHook", attachments: nil)
 try! slackHook.post(message)
 ```
+
+*NOTE*: Assuming you have a runloop, otherwise `RunLoop.main.run()` will be needed. See [Sources/SlackHook/main.swift](Sources/SlackHook/main.swift) for how this is used in the command line tool.
 
 ## Dependancies
 
@@ -56,6 +59,8 @@ In your `Packages.swift` add:
 Whilst this is by no means an exhaustive list, I would like to thank:
 - [Apple](https://developer.apple.com), standing on the shoulders of giants...
 - Excellent article on [Building a command line tool using the Swift Package Manager](https://www.swiftbysundell.com/posts/building-a-command-line-tool-using-the-swift-package-manager) by [John Sundell](https://github.com/johnsundell)
+- [httpbin](https://httpbin.org), a simple HTTP Request & Response Service. Such a useful tool, cannot recommend enough.
+- [Using XCTAssertThrowsError in your Swift tests](http://makebeforebreak.com/post/using-xctassertthrowserror-in-your-swift-tests/) for testing the right `Error` is thrown
 
 ## License
 
