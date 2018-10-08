@@ -17,13 +17,13 @@ cache:
 
 build-linux:
   stage: build-linux
-  image: ibmcom/swift-ubuntu:4.1.2
+  image: ibmcom/swift-ubuntu:4.2
   script:
     - time swift build -c release
 
 test-linux:
   stage: test-linux
-  image: ibmcom/swift-ubuntu:4.1.2
+  image: ibmcom/swift-ubuntu:4.2
   script:
     - swift test
 
