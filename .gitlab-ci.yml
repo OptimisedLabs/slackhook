@@ -50,4 +50,4 @@ coverage-report:
     # Without this config SPM uses a deployment target of 10.10 that will cause failure
     - swift package generate-xcodeproj --enable-code-coverage --xcconfig-overrides config.xcconfig
     - xcodebuild -project SlackHook.xcodeproj -scheme SlackHook-Package -derivedDataPath Build/ clean build test
-    - xcrun xccov view Build/Logs/Test/*.xccovreport
+    - zsh -c "xcrun xccov view --only-targets Build/Logs/Test/**/*.xccovreport"
